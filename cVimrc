@@ -1,0 +1,25 @@
+let defaultengine = "duckduckgo"
+let barposition = "bototm"
+" copy tab title to clipobard
+copyCurrentTabTitle -> {{
+  Status.setMessage(document.title,3);
+  Clipboard.copy(document.title);
+}}
+map yt :call copyCurrentTabTitle<CR>
+" """"""""""""
+" Open in pincognito
+openLinkIncognito(link) -> {{
+var value = "call :tabopen " + link.href + " |<CR>"
+Mappings.parseLine(value);
+}}
+map onf createScriptHint(openLinkIncognito)
+" """""""""""
+" Copy link text
+yankText(link) -> {{
+  Status.setMessage(link.text,3);
+  Clipboard.copy(link.text);
+}}
+map zy createScriptHint(yankText)
+" """""""""
+let blacklists = ["https://mail.google.com/*","*://mail.google.com/*","@https://mail.google.com/mail/*","casa.imayf.com","192.168.1.20"]
+map o :open<Space>
